@@ -1,0 +1,9 @@
+src/jwt_tool/_version.py
+.py3
+__pycache__
+.direnv
+dist
+.pdm-python
+.pdm-build
+.tox
+.idea

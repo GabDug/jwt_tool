@@ -1,0 +1,98 @@
+[project]
+name = "jwt-tool"
+version = "2.3.0.alpha0"
+# dynamic = ["version"]
+description = "JWT Tool is a toolkit for testing, tweaking and cracking JSON Web Tokens."
+authors = [
+    { name = "ticarpi", email = "andy.tyler@gmail.com" },
+]
+dependencies = [
+    "termcolor",
+    "cprint",
+    "pycryptodomex",
+    "requests",
+    'colorama; platform_system == "Windows"',
+]
+requires-python = ">=3.8"
+keywords = ["security", "jwt"]
+readme = "README.md"
+license = { text = "GPL-3.0-or-later" }
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    # "Typing :: Typed",
+    "Topic :: Security",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+]
+
+[project.urls]
+Repository = "https://github.com/ticarpi/jwt_tool"
+# Changelog = "https://github.com/ticarpi/jwt_tool/release"
+
+[project.scripts]
+"jwt-tool" = "jwt_tool:main"
+"jwt_tool" = "jwt_tool:main"
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm]
+distribution = true
+plugins = ["sync-pre-commit-lock", "pdm-autoexport"]
+
+[tool.pdm.scripts]
+"lint-ruff" = "ruff check ."
+
+[tool.pdm.version]
+source = "scm"
+write_to = "jwt_tool/_version.py"
+write_template = "__version__ = \"{}\"\n"
+
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "coloredlogs==15.0.1",
+    "pre-commit==3.2.2",
+    "isort>=5.13.2",
+    "mypy>=1.8.0",
+    "types-docopt>=0.6.11.4",
+    "autopep8>=2.0.4",
+    "ruff>=0.3.0",
+    "tox-pdm>=0.7.2",
+    "tox>=4.13.0",
+    "pytest>=8.0.2",
+    "colorama>=0.4.6",
+]
+
+[[tool.pdm.autoexport]]
+filename = "requirements.txt"
+groups = ["default"]
+
+[[tool.pdm.autoexport]]
+filename = "requirements-dev.txt"
+groups = ["dev"]
+
+[tool.autopep8]
+max_line_length = 120
+in-place = true
+recursive = true
+aggresive = 1
+
+[tool.mypy]
+files = ["src"]
+python_version = "3.8"
+
+# [[tool.mypy.overrides]]
+# module = "coloredlogs"
+# ignore_missing_imports = true
